@@ -1,0 +1,24 @@
+package com.mercadona.order_manager.domain.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ProductOrdered {
+    private Long id;
+    private Integer quantity;
+
+    public boolean isValid() {
+        return quantity != null && quantity > 0;
+    }
+
+}

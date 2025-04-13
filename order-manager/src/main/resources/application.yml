@@ -1,6 +1,9 @@
 spring:
   application:
     name: order-manager
+
+  # Database configuration
+
   datasource:
     url: jdbc:h2:mem:orderdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
@@ -12,5 +15,22 @@ spring:
       path: /h2-console
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
+#    sql:
+#      init:
+#        mode: always
+
+  # Kafka configuration
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: order-manager-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.value.default.type: com.mercadona.order_manager.infrastructure.inbound.kafka.model.OrderMessage

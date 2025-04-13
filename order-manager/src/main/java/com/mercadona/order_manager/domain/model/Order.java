@@ -6,21 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Order {
-    private Long id;
-    private String description;
+    private UUID id;
+
+    private String customerId;
+    private List<ProductOrdered> products;
     private BigDecimal total;
     private String status;
-    private LocalDateTime createdDate;
-
-    public boolean isValid() {
-        return total != null && total.compareTo(BigDecimal.ZERO) > 0;
-    }
+    private OffsetDateTime creationDate;
+    private OffsetDateTime completionDate;
 
 }

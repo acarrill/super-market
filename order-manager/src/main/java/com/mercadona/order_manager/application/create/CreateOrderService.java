@@ -14,9 +14,9 @@ public class CreateOrderService implements CreateOrderUseCase {
     @Override
     public Order createOrder(Order order) {
         // Optional: Validate the order using domain rules.
-        if (!order.isValid()) {
-            throw new IllegalArgumentException("Invalid order details");
-        }
+//        if (!order.isValid()) {
+//            throw new IllegalArgumentException("Invalid order details");
+//        }
         // Persist the order using the command repository (outbound port)
         return orderRepository.save(order);
     }
